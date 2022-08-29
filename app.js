@@ -1,7 +1,7 @@
 var app = new Vue({
   el: "#app",
   data: {
-    welcomeMessage: "Vue JS - Trabajo Práctico Uno",
+    welcomeMessage: "Vue JS --- Trabajo Práctico Uno",
     counter: 0,
   },
   methods: {
