@@ -2,7 +2,7 @@
     <div class="card d-flex">
         <img :src="meal.portada" :alt="meal.titulo">
         <h3> {{meal.titulo}} </h3>
-        <p>$ <b> {{meal.costo}} </b> </p>
+        <p>$<b> {{meal.costo}} </b> </p>
         <Counter :listaCarrito='listaCarrito' :meal='meal' />
     </div>
 
@@ -36,8 +36,9 @@ export default {
     border-color: palegreen;
     border-style: solid;
     border-width: 1px;
-    background-color: whitesmoke !important;
+    background-color: whitesmoke ;
     transition: 0.7s;
+    position: relative;
 }
 
 .card img {
@@ -60,6 +61,8 @@ export default {
 .card p {
     font-size: 20px;
     font-weight: bold;
+    position: absolute;
+    bottom: 150px;
 }
 
 </style>

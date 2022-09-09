@@ -1,12 +1,14 @@
 <template>
   <div id="app">
-    <Header :title='title' />
+    <Header :title='title' :listaCarrito='listaCarrito'/>
+    <h2 class="titleHome">{{titleHome}}</h2>
     <div class="cardContainer">
       <CoderCards v-for="meal in codermeals" :key="meal.id" :meal="meal" :listaCarrito='listaCarrito' />
     </div>
     <div v-if="listaCarrito.length!=0">
       <CarritoCards  :listaCarrito="listaCarrito" :carritoTitle="carritoTitle" />
     </div>
+    <Footer :footerTitle='footerTitle' />
   </div>
 </template>
 
@@ -14,6 +16,7 @@
 import Header from './components/Header.vue';
 import CoderCards from './components/CoderCards.vue';
 import CarritoCards from './components/CarritoCards.vue';
+import Footer from './components/Footer.vue';
 
 
 
@@ -22,12 +25,15 @@ export default {
   components: {
     Header,
     CoderCards,
-    CarritoCards
-  },
+    CarritoCards,
+    Footer,
+},
   data() {
     return {
       title: 'CoderMeals - VUE/CLI ',
       carritoTitle: 'Lista Carrito',
+      footerTitle: 'CoderHouse - CoderMeals',
+      titleHome: 'Nuestras Comidas',
       listaCarrito: [],
       codermeals: [
         {
@@ -79,7 +85,9 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  position: relative;
+  min-height: 91.5vh;
+  padding-bottom: 80px;
 }
 
 .cardContainer {
@@ -88,5 +96,11 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  
+}
+
+.titleHome{
+  padding-top: 75px;
+  font-size: 28px;
 }
 </style>

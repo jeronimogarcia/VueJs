@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="buttonsContainer">
         <button @click="decrementar()">-</button>
         <button @click="incrementar()">+</button>
         <p> {{ meal.counter }} </p>
@@ -56,5 +56,17 @@ export default {
 </script>
 
 <style scoped>
+.buttonsContainer{
+    position: absolute;
+    bottom: 20px;
+}
+.buttonsContainer button{
+    min-width: 30px;
+    margin-right: 2px;
+    margin-left: 2px;
+}
 
+.buttonsContainer button:hover{
+    background-color: rgb(93, 204, 19);
+}
 </style>
