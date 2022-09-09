@@ -6,21 +6,20 @@
                 <CartWidget :listaCarrito="listaCarrito" />
             </div>
         </div>
-        <NavegationBar />
+        <NavigationBar />
     </div>
 </template>
 
 <script>
 import CartWidget from './CartWidget.vue';
-
-import NavegationBar from './NavegationBar.vue';
+import NavigationBar from './NavigationBar.vue';
 
 export default {
     props: {
         title: String,
         listaCarrito: Array
     },
-    components: { CartWidget, NavegationBar }
+    components: { CartWidget, NavigationBar }
 }
 </script>
 
