@@ -17,8 +17,8 @@
               <td>{{producto.titulo}}</td>
               <td class="cartImage"><img :src="producto.portada" :alt="producto.titulo"></td>
               <td>${{producto.costo}}</td>
-              <td>{{producto.bougth}}</td>
-              <td>$ {{producto.bougth*producto.costo}}</td>
+              <td>{{producto.bought}}</td>
+              <td>$ {{producto.bought*producto.costo}}</td>
           </tr>
         </tbody>
       </table>

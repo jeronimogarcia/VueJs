@@ -1,20 +1,29 @@
 <template>
     <div class="widgetContainer">
-        <p><font-awesome-icon icon="fa-solid fa-cart-shopping" /></p>
-        <p>{{ listaCarrito.length }}</p>
+        <p>
+            <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+        </p>
+        <p>{{ calculoTotalProductos }}</p>
     </div>
 </template>
 
-<script> 
+<script>
 export default {
     props: {
-        listaCarrito: Array
+        listaCarrito: Array,
     },
+    computed: {
+        calculoTotalProductos() {
+            return (this.listaCarrito.reduce((suma, product) => {
+                return suma + product.bought
+            }, 0));
+        }
+    }
 }
 </script>
 
 <style  scoped>
-.widgetContainer{
+.widgetContainer {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -22,9 +31,10 @@ export default {
     right: 0px;
     bottom: 7px;
 }
-.widgetContainer p{
+
+.widgetContainer p {
     font-size: 20px;
     padding-right: 5px;
     font-style: bold;
-}    
+}
 </style>

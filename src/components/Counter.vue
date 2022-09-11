@@ -31,13 +31,13 @@ export default {
                 (productFind) => meal.id === productFind.id
             );
             if (findProductIndex !== -1) {
-                if (listaCarrito[findProductIndex].bougth + counter <= meal.quantity) {
-                    listaCarrito[findProductIndex].bougth =
-                        listaCarrito[findProductIndex].bougth + counter;
+                if (listaCarrito[findProductIndex].bought + counter <= meal.quantity) {
+                    listaCarrito[findProductIndex].bought =
+                        listaCarrito[findProductIndex].bought + counter;
                 } else {
                     alert(
                         `La cantidad que quiere sumar supera a la del stock. Disponemos de ${meal.quantity
-                        } unidades. Puede agregar ${meal.quantity - listaCarrito[findProductIndex].bougth
+                        } unidades. Puede agregar ${meal.quantity - listaCarrito[findProductIndex].bought
                         } unidades mas como maximo`
                     );
                 }
@@ -47,7 +47,7 @@ export default {
                     titulo: meal.titulo,
                     costo: meal.costo,
                     portada: meal.portada,
-                    bougth: meal.counter,
+                    bought: meal.counter,
                 });
             }
         }
