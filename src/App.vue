@@ -1,12 +1,32 @@
 <template>
   <div id="app">
-    <Header :title='title' :listaCarrito='listaCarrito'/>
+    <Header 
+    :title='title' 
+    :listaCarrito='listaCarrito' 
+    />
+    <AdminUser 
+    :isLoged="isLoged" 
+    @changeBoolean="changeBoolean" 
+    />
+    <RegisterForm :listaUsuarios="listaUsuarios" />
+    <LoginForm :listaUsuarios="listaUsuarios" @changeBoolean="changeBoolean" />
     <h2 class="titleHome">{{titleHome}}</h2>
     <div class="cardContainer">
-      <CoderCards v-for="meal in codermeals" :key="meal.id" :meal="meal" :listaCarrito='listaCarrito' />
+      <CoderCards 
+      v-for="(meal, index) in codermeals" 
+      :index="index" 
+      :key="meal.id" 
+      :meal="meal" 
+      :listaCarrito='listaCarrito' 
+      :isLoged="isLoged" 
+      :listaMeals="codermeals"
+      />
     </div>
     <div v-if="listaCarrito.length!=0">
-      <CarritoCards  :listaCarrito="listaCarrito" :carritoTitle="carritoTitle" />
+      <CarritoCards 
+      :listaCarrito="listaCarrito" 
+      :carritoTitle="carritoTitle" 
+      />
     </div>
     <Footer :footerTitle='footerTitle' />
   </div>
@@ -17,6 +37,9 @@ import Header from './components/Header.vue';
 import CoderCards from './components/CoderCards.vue';
 import CarritoCards from './components/CarritoCards.vue';
 import Footer from './components/Footer.vue';
+import RegisterForm from './components/RegisterForm.vue';
+import LoginForm from './components/LoginForm.vue';
+import AdminUser from './components/AdminUser.vue';
 
 
 
@@ -27,7 +50,10 @@ export default {
     CoderCards,
     CarritoCards,
     Footer,
-},
+    RegisterForm,
+    LoginForm,
+    AdminUser
+  },
   data() {
     return {
       title: 'CoderMeals - VUE/CLI ',
@@ -35,6 +61,8 @@ export default {
       footerTitle: 'CoderHouse - CoderMeals',
       titleHome: 'Nuestras Comidas',
       listaCarrito: [],
+      listaUsuarios: [],
+      isLoged: false,
       codermeals: [
         {
           id: 1,
@@ -44,6 +72,9 @@ export default {
             "https://4.bp.blogspot.com/-D5Wvi_gX_Kg/WLatk_GVnKI/AAAAAAAAA5M/-y0gB26R0Dkb01QmdgfZqQALtd9NMV2DACLcB/s1600/P70301-072354.jpg",
           counter: 1,
           quantity: 5,
+          quality:9,
+          taste: 9,
+          fragrance: 8
         },
         {
           id: 2,
@@ -53,6 +84,9 @@ export default {
             "https://static.cookist.it/wp-content/uploads/sites/21/2017/12/istock-480277738.jpg",
           counter: 1,
           quantity: 6,
+          quality:7,
+          taste: 7,
+          fragrance: 8
         },
         {
           id: 3,
@@ -62,6 +96,9 @@ export default {
             "https://www.fontecesia.it/wp-content/uploads/2018/11/porchetta-umbra-1920x1280.jpg",
           counter: 1,
           quantity: 10,
+          quality:10,
+          taste: 7,
+          fragrance: 9
         },
         {
           id: 4,
@@ -71,8 +108,16 @@ export default {
             "https://irepo.primecp.com/2016/03/259860/recipe-8673_ExtraLarge1000_ID-1461628.jpg",
           counter: 1,
           quantity: 4,
+          quality:8,
+          taste: 6,
+          fragrance: 7,
         },
       ],
+    }
+  },
+  methods: {
+    changeBoolean() {
+      this.isLoged = !this.isLoged
     }
   }
 }
@@ -96,11 +141,11 @@ export default {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  
+  padding-bottom: 20px;
+
 }
 
-.titleHome{
-  padding-top: 75px;
+.titleHome {
   font-size: 28px;
 }
 </style>

@@ -10,15 +10,39 @@
           <th>Precio</th>
           <th>Cantidad</th>
           <th>SubTotal</th>
+          <th>Quitar Producto</th>
         </thead>
         <tbody>
-          <tr v-for="producto in listaCarrito" :key="producto.id" :producto="producto">
-              <td>{{producto.id}}</td>
-              <td>{{producto.titulo}}</td>
-              <td class="cartImage"><img :src="producto.portada" :alt="producto.titulo"></td>
-              <td>${{producto.costo}}</td>
-              <td>{{producto.bought}}</td>
-              <td>$ {{producto.bought*producto.costo}}</td>
+          <tr v-for="(producto, index) in listaCarrito" :key="producto.id" :producto="producto">
+            <td>{{producto.id}}</td>
+            <td>{{producto.titulo}}</td>
+            <td class="cartImage"><img :src="producto.portada" :alt="producto.titulo"></td>
+            <td>${{producto.costo}}</td>
+            <td>{{producto.bought}}</td>
+            <td>$ {{producto.bought*producto.costo}}</td>
+            <td>
+              <p class="crossSize">
+                <font-awesome-icon icon="fa-solid fa-square-xmark" @click="quitarProductoCarrito(index)" />
+              </p>
+            </td>
+          </tr>
+        </tbody>
+        <thead>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th></th>
+          <th>Total Compra</th>
+        </thead>
+        <tbody>
+          <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td>${{ calculoTotal }}</td>
           </tr>
         </tbody>
       </table>
@@ -31,6 +55,18 @@ export default {
   props: {
     carritoTitle: String,
     listaCarrito: Array
+  },
+  methods: {
+    quitarProductoCarrito(i) {
+      this.listaCarrito.splice(i, 1)
+    }
+  },
+  computed: {
+    calculoTotal() {
+      return (this.listaCarrito.reduce((suma, item) => {
+        return suma + (item.bought*item.costo)
+      }, 0));
+    }
   }
 
 }
@@ -63,5 +99,10 @@ export default {
 
 .cartImage img {
   width: 70px;
+}
+
+.crossSize {
+  font-size: 45px;
+  margin: 5px;
 }
 </style>

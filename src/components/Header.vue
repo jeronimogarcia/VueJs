@@ -6,7 +6,7 @@
                 <CartWidget :listaCarrito="listaCarrito" />
             </div>
         </div>
-        <NavigationBar />
+        <!-- <NavigationBar /> -->
     </div>
 </template>
 
