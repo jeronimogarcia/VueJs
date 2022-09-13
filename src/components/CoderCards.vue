@@ -9,7 +9,8 @@
     :index="index" 
     :listaMeals="listaMeals" 
     :listaCarrito="listaCarrito" />
-    <DetalleProducto v-show="isShown" :meal="meal"/>
+    <button @click="productDetailed()" class="detailButton">Detalle</button>
+    <DetalleProducto v-show="isShown" :meal="meal" @productDetail="productDetail"/>
   </div>
 </template>
 
@@ -34,8 +35,11 @@ export default {
   components: { Counter, DetalleProducto },
   methods:{
     productDetailed(){
-      this.isShown = true
-    }
+      this.isShown = !this.isShown
+    },
+    productDetail(){
+      this.isShown = !this.isShown
+    },
   }
 }
 </script>
@@ -69,9 +73,6 @@ export default {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
 }
 
-.card button {
-  width: 40px;
-}
 
 .card .btn-success {
   width: 120px;
@@ -81,6 +82,17 @@ export default {
   font-size: 20px;
   font-weight: bold;
   position: absolute;
-  bottom: 150px;
+  bottom: 160px;
+}
+
+.detailButton{
+  position: absolute;
+  bottom: 15px;
+  width: 90px;
+  text-transform: uppercase;
+}
+
+.detailButton:hover{
+  background-color: aqua;
 }
 </style>

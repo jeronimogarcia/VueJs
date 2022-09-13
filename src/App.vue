@@ -74,6 +74,7 @@ export default {
           quantity: 5,
           quality:9,
           taste: 9,
+          healthy: 10,
           fragrance: 8
         },
         {
@@ -86,7 +87,8 @@ export default {
           quantity: 6,
           quality:7,
           taste: 7,
-          fragrance: 8
+          healthy: 9,
+          fragrance: 8,
         },
         {
           id: 3,
@@ -98,6 +100,7 @@ export default {
           quantity: 10,
           quality:10,
           taste: 7,
+          healthy: 7,
           fragrance: 9
         },
         {
@@ -110,6 +113,7 @@ export default {
           quantity: 4,
           quality:8,
           taste: 6,
+          healthy: 6,
           fragrance: 7,
         },
       ],
@@ -123,7 +127,7 @@ export default {
 }
 </script>
 
-<style>
+<style scope>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;

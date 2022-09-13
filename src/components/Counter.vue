@@ -3,7 +3,6 @@
     <button :disabled="isLoged" @click="decrementar()">-</button>
     <button :disabled="isLoged" @click="incrementar()">+</button>
     <p> {{ meal.counter }} </p>
-
     <button class="buttonCounter" :disabled="isLoged" @click="add(meal, listaCarrito, meal.counter)">AGREGAR</button>
     <br>
     <button class="buttonCounter buttonClean" @click="eliminarProducto(listaMeals, index)"
@@ -71,7 +70,7 @@ export default {
 <style scoped>
 .buttonsContainer {
   position: absolute;
-  bottom: 20px;
+  bottom: 50px;
 }
 
 .buttonsContainer button {
