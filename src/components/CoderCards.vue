@@ -1,46 +1,23 @@
 <template>
   <div class="card d-flex">
-    <img :src="meal.portada" :alt="meal.titulo">
     <h3> {{meal.titulo}} </h3>
-    <p>$<b> {{meal.costo}} </b> </p>
-    <Counter 
-    :meal='meal' 
-    :isLoged="isLoged" 
-    :index="index" 
-    :listaMeals="listaMeals" 
-    :listaCarrito="listaCarrito" />
-    <button @click="productDetailed()" class="detailButton">Detalle</button>
-    <DetalleProducto v-show="isShown" :meal="meal" @productDetail="productDetail"/>
+    <div>{{meal.id}}</div>
+    <p>${{meal.costo}}</p>
+    <DeleteMeal :index='index' @deleteMeal="deleteMeal"/>
   </div>
 </template>
 
 <script>
 
-import Counter from './Counter.vue';
-import DetalleProducto from './DetalleProducto.vue';
+import DeleteMeal from './DeleteMeal.vue';
 
 export default {
-  data(){
-    return{
-      isShown: false
-    }
-  },
   props: {
+    deleteMeal: Function,
     meal: Object,
-    listaCarrito: Array,
-    listaMeals: Array,
-    isLoged: Boolean,
     index: Number
   },
-  components: { Counter, DetalleProducto },
-  methods:{
-    productDetailed(){
-      this.isShown = !this.isShown
-    },
-    productDetail(){
-      this.isShown = !this.isShown
-    },
-  }
+  components: { DeleteMeal },
 }
 </script>
 
