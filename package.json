@@ -15,11 +15,13 @@
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.8.3",
     "vue": "^2.7.10",
-    "vue-form": "^4.10.3"
+    "vue-form": "^4.10.3",
+    "vuelidate": "^0.7.7"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
+    "@types/vuelidate": "^0.7.15",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",

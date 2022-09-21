@@ -1,7 +1,32 @@
 <template>
+  <div>
+    <Header :title='title' />
+    <Formulario :usersList='usersList'/>
+    <Table :usersList="usersList" :listaTitle="listaTitle"/>
+  </div>
 </template>
 
 <script>
+import Header from "./components/Header.vue";
+import Formulario from "./components/Formulario.vue";
+import Table from "./components/Table.vue";
+
+export default {
+  components: {
+    Header,
+    Formulario,
+    Table
+},
+
+  data() {
+    return {
+      title: 'Formularios',
+      listaTitle: 'Lista de Usuarios',
+      usersList: [],
+    }
+  }
+}
+
 </script>
 
 <style scope>
