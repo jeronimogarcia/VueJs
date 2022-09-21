@@ -6,7 +6,7 @@
         type="name"
         placeholder="Ingrese un usuario"
         class="form-control my-3"
-        v-model="$v.user.$model"
+        v-model.trim="$v.user.$model"
         :class="{
           'is-invalid': $v.user.$error,
           'is-valid': !$v.user.$error & $v.user.required,
@@ -19,7 +19,7 @@
         type="email"
         placeholder="Ingrese un email"
         class="form-control my-3"
-        v-model="$v.email.$model"
+        v-model.trim="$v.email.$model"
         :class="{
           'is-invalid': $v.email.$error,
           'is-valid': !$v.user.$error & $v.email.required,
@@ -34,7 +34,7 @@
         type="password"
         placeholder="Ingrese password"
         class="form-control my-3"
-        v-model="$v.password.$model"
+        v-model.trim="$v.password.$model"
         :class="{
           'is-invalid': $v.password.$error,
           'is-valid': !$v.user.$error & $v.password.required,
@@ -49,7 +49,7 @@
         type="password"
         placeholder="Repita password"
         class="form-control my-3"
-        v-model="$v.samePassword.$model"
+        v-model.trim="$v.samePassword.$model"
         :class="{
           'is-invalid': $v.samePassword.$error,
           'is-valid': !$v.user.$error & $v.samePassword.required,
@@ -90,7 +90,9 @@ export default {
       if (this.$v.$invalid) {
       } else {
         const found = this.usersList.find(
-          (user) => user.user == this.$v.user.$model || user.email == this.$v.email.$model
+          (user) =>
+            user.user.toLowerCase() == this.$v.user.$model.toLowerCase() ||
+            user.email.toLowerCase() == this.$v.email.$model.toLowerCase()
         );
         if (found) {
           alert("Usuario o email ya usados");
