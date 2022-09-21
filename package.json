@@ -14,7 +14,8 @@
     "bootstrap": "^5.2.1",
     "bootstrap-vue": "^2.22.0",
     "core-js": "^3.8.3",
-    "vue": "^2.7.10"
+    "vue": "^2.7.10",
+    "vue-form": "^4.10.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
