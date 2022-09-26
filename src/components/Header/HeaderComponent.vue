@@ -1,10 +1,10 @@
 <template>
   <div class="headerMainContainer">
-    <div>
-      <h1>CoderMeals</h1>
+    <div class="coderMealsContainer">
+      <router-link to="/"><h1>CoderMeals</h1></router-link>
     </div>
     <NavigationBar />
-    <CartWidget />
+    <CartWidget :cartList="cartList" />
   </div>
 </template>
 
@@ -12,12 +12,18 @@
 import CartWidget from "./CartWidget.vue";
 import NavigationBar from "./NavigationBar.vue";
 export default {
-  props: {},
+  props: {
+    cartList: Array,
+  },
   components: { CartWidget, NavigationBar },
 };
 </script>
 
 <style scoped>
+a {
+  color: black;
+  text-decoration: none;
+}
 .headerMainContainer {
   display: flex;
   flex-direction: row;
@@ -25,6 +31,9 @@ export default {
   padding: 10px 0px 10px 0px;
   background-color: yellow;
   border-bottom: 1px solid black;
+  
 }
-
+.coderMealsContainer{
+  width: 30%;
+}
 </style>

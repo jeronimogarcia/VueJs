@@ -4,7 +4,6 @@
       <li><router-link to="/">Home</router-link></li>
       <li><router-link to="/login">Login/Register</router-link></li>
       <li><router-link to="/cart">Cart</router-link></li>
-
     </ul>
   </div>
 </template>
@@ -19,17 +18,25 @@ export default {};
   align-items: center;
   position: relative;
   top: 5px;
+  justify-content: center;
+  width: 40%;
 }
 
 .navBarContainer ul {
   list-style: none;
   display: flex;
   margin: 0px;
+  padding-left: 0px;
 }
 
 .navBarContainer ul li {
   font-size: 18px;
   text-transform: uppercase;
   padding: 0px 10px 0px 10px;
+}
+
+a{
+  text-decoration: none;
+  color: black;
 }
 </style>

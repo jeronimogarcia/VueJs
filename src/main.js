@@ -6,10 +6,9 @@ import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import { BootstrapVue } from "bootstrap-vue";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
-import { faCartShopping } from "@fortawesome/free-solid-svg-icons";
+import { faCartShopping, faSquareXmark, faStar } from "@fortawesome/free-solid-svg-icons";
 import router from './router/router'
-library.add(faCartShopping);
-
+library.add(faCartShopping, faSquareXmark, faStar );
 Vue.use(Vuelidate)
 Vue.use(BootstrapVue)
 Vue.component("font-awesome-icon", FontAwesomeIcon);

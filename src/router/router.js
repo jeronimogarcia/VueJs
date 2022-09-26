@@ -1,6 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router'
-import coderListaMeals from '../models/arrayMeals'
+// import coderListaMeals from '../models/arrayMeals'
 Vue.use(VueRouter)
 
 const router = new VueRouter ({
@@ -11,7 +11,7 @@ const router = new VueRouter ({
             path: '/',
             name: 'home',
             component: () => import('../views/HomeView.vue'),
-            props: {coderListaMeals}
+            // props: {coderListaMeals}
         },
         {
             path: '/login',
@@ -22,7 +22,13 @@ const router = new VueRouter ({
             path: '/cart',
             name: 'cart',
             component: () => import('../views/CartView.vue'),
+        },
+        {
+            path: '/product/:id',
+            name: 'product',
+            component: () => import('../views/ProductDetail.vue'),
         }
+
     ]
 })
 
