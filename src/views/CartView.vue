@@ -16,17 +16,17 @@
           <tbody>
             <tr
               v-for="(producto, index) in cartList"
-              :key="producto.id"
+              :key="producto.idt"
               :producto="producto"
             >
-              <td>{{ producto.id }}</td>
-              <td>{{ producto.titulo }}</td>
+              <td>{{ producto.idt }}</td>
+              <td>{{ producto.title }}</td>
               <td class="cartImage">
-                <img :src="producto.portada" :alt="producto.titulo" />
+                <img :src="producto.portrait" :alt="producto.title" />
               </td>
-              <td>${{ producto.costo }}</td>
+              <td>${{ producto.price }}</td>
               <td>{{ producto.bought }}</td>
-              <td>$ {{ producto.bought * producto.costo }}</td>
+              <td>$ {{ producto.bought * producto.price }}</td>
               <td>
                 <p class="crossSize">
                   <font-awesome-icon
@@ -82,7 +82,7 @@ export default {
   computed: {
     calculoTotal() {
       return this.cartList.reduce((suma, item) => {
-        return suma + item.bought * item.costo;
+        return suma + item.bought * item.price;
       }, 0);
     },
   },

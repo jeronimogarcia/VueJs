@@ -27,8 +27,7 @@ const router = new VueRouter ({
             path: '/product/:id',
             name: 'product',
             component: () => import('../views/ProductDetail.vue'),
-        }
-
+        },
     ]
 })
 

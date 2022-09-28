@@ -3,10 +3,10 @@
     <h1>Lista Productos</h1>
     <div class="cardContainer">
       <div v-for="(meal, index) in coderMeals" :key="meal.name" class="card">
-        <img :src="meal.portada" :alt="meal.titulo" />
-        <h3>{{ meal.titulo }}</h3>
+        <img :src="meal.portrait" :alt="meal.title" />
+        <h3>{{ meal.title }}</h3>
         <p>
-          $<b> {{ meal.costo }} </b>
+          $<b> {{ meal.price }} </b>
         </p>
         <Counter
           :meal="meal"
@@ -14,8 +14,10 @@
           :coderMeals="coderMeals"
           :cartList="cartList"
         />
-        <router-link v-bind:to="'/product/' + meal.id"
-          ><b-button class="buttonDetalle btn-info">Ver Detalle</b-button></router-link
+        <router-link v-bind:to="'/product/' + meal.idt"
+          ><b-button class="buttonDetalle btn-info"
+            >Ver Detalle</b-button
+          ></router-link
         >
       </div>
     </div>
@@ -27,11 +29,24 @@ import Counter from "../components/Counter.vue";
 
 export default {
   props: {
-    coderMeals: Array,
     cartList: Array,
   },
   data() {
-    return {};
+    return {
+      urlFetch: "https://633435bf90a73d0fede99930.mockapi.io/meals",
+      coderMeals: [],
+      getData: async () => {
+        await fetch(this.urlFetch)
+          .then((response) => response.json())
+          .then((data) => {
+            this.coderMeals = data;
+          })
+          .catch((err) => console.error(`${err}`))
+      },
+    };
+  },
+  mounted() {
+    this.getData();
   },
   methods: {},
   components: { Counter },
@@ -94,7 +109,7 @@ h1 {
   background-color: aqua;
 }
 
-.buttonDetalle{
+.buttonDetalle {
   width: 140px;
 }
 </style>

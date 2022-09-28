@@ -1,56 +1,40 @@
 <template>
-  <div class="cardContainer">
-    <div class="tituloContainer">
+  <div class="cardContainer" v-if="product">
+    <div class="titleContainer">
       <h1>Detalle del Producto</h1>
     </div>
     <div class="infoContainer">
       <div class="imgContainer">
         <div class="imgSubContainer">
-          <img :src="product.portada" alt="imagen" />
+          <img :src="product.portrait" alt="imagen" />
         </div>
       </div>
       <div class="textContainer">
-        <h3>{{ product.titulo }}</h3>
-        <p>Costo: ${{ product.costo }}</p>
+        <h3>{{ product.title }}</h3>
+        <p>Costo: ${{ product.price }}</p>
         <p>Stock: {{ product.quantity }} unidades</p>
         <h4>Puntuación</h4>
         <div class="starsContainer">
           Quality:
-          <p
-            class="stars"
-            v-for="i in Math.round(this.product.quality / 2)"
-            :key="i"
-          >
+          <p class="stars" v-for="i in crearLista(product.quality)" :key="i">
             <font-awesome-icon icon="fa-solid fa-star" />
           </p>
         </div>
         <div class="starsContainer">
           Taste:
-          <p
-            class="stars"
-            v-for="i in Math.round(this.product.taste / 2)"
-            :key="i"
-          >
+          <p class="stars" v-for="i in crearLista(product.taste)" :key="i">
             <font-awesome-icon icon="fa-solid fa-star" />
           </p>
         </div>
         <div class="starsContainer">
           Healthy:
-          <p
-            class="stars"
-            v-for="i in Math.round(this.product.healthy / 2)"
-            :key="i"
-          >
+          <p class="stars" v-for="i in crearLista(product.healthy)" :key="i">
             <font-awesome-icon icon="fa-solid fa-star" />
           </p>
         </div>
         <div class="starsContainer">
           Fragrance:
-          <p
-            class="stars"
-            v-for="i in Math.round(this.product.fragrance / 2)"
-            :key="i"
-          >
+          <p class="stars" v-for="i in crearLista(product.fragrance)" :key="i">
             <font-awesome-icon icon="fa-solid fa-star" />
           </p>
         </div>
@@ -64,13 +48,32 @@
 
 <script>
 export default {
-  props: {
-    coderMeals: Array,
-  },
   data() {
     return {
-      product: { ...this.coderMeals[this.$route.params.id - 1] },
+      product: {},
+      urlFetch: `https://633435bf90a73d0fede99930.mockapi.io/meals/${this.$route.params.id}`,
+      getData: async () => {
+        await fetch(this.urlFetch)
+          .then((response) => response.json())
+          .then((data) => {
+            this.product = data;
+          })
+          .catch((err) => console.error(`${err}`));
+      },
     };
+  },
+  mounted() {
+    this.getData();
+  },
+  methods: {
+    crearLista(propiedad) {
+      let lista = [];
+      let num = Math.round(propiedad / 2);
+      for(let i=0; i<num; i++){
+        lista.push(i)
+      };
+      return lista
+    },
   },
 };
 </script>
@@ -121,7 +124,7 @@ export default {
   font-weight: bold;
 }
 
-h1{
+h1 {
   margin-top: 10px;
   margin-bottom: 15px;
 }

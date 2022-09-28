@@ -29,7 +29,7 @@
       },
       add(meal, cartList, counter) {
         const findProductIndex = cartList.findIndex(
-          (productFind) => meal.id === productFind.id
+          (productFind) => meal.idt === productFind.idt
         );
         if (findProductIndex !== -1) {
           if (cartList[findProductIndex].bought + counter <= meal.quantity) {
@@ -44,10 +44,10 @@
           }
         } else {
           cartList.push({
-            id: meal.id,
-            titulo: meal.titulo,
-            costo: meal.costo,
-            portada: meal.portada,
+            idt: meal.idt,
+            title: meal.title,
+            price: meal.price,
+            portrait: meal.portrait,
             bought: meal.counter,
           });
         }
