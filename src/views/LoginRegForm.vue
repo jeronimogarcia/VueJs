@@ -1,8 +1,8 @@
 <template>
   <div>
     <LoginForm :usersList="usersList"/>
-    <RegisterForm :usersList="usersList" />
-    <TableLogin :usersList="usersList" />
+    <RegisterForm :usersList="usersList" @actualizarLista="actualizarLista"/>
+    <TableLogin :usersList="usersList" @actualizarLista="actualizarLista"/>
   </div>
 </template>
 
@@ -17,6 +17,11 @@ export default {
     return {
       usersList: [],
     };
+  },
+  methods:{
+    actualizarLista(info){
+       this.usersList = info
+    }
   },
   components: { LoginForm, RegisterForm, TableLogin },
 };

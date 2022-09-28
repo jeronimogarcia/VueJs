@@ -15,8 +15,12 @@
           }"
         />
         <p class="text-danger" v-if="!$v.user.minLength">Minimo 6 caracteres</p>
-        <p class="text-danger" v-if="!$v.user.maxLength">Maximo 20 caracteres</p>
-        <p class="text-danger" v-if="!$v.user.alphaNum">Solo caracteres alfanumericos</p>
+        <p class="text-danger" v-if="!$v.user.maxLength">
+          Maximo 20 caracteres
+        </p>
+        <p class="text-danger" v-if="!$v.user.alphaNum">
+          Solo caracteres alfanumericos
+        </p>
 
         <span>Email</span>
         <input
@@ -32,7 +36,9 @@
         <p class="text-danger" v-if="!$v.email.email">
           Email incorrecto. Debe contener arroba y dominio. Ejemplo@hotmail.com
         </p>
-        <p class="text-danger" v-if="!$v.email.maxLength">Maximo 30 caracteres</p>
+        <p class="text-danger" v-if="!$v.email.maxLength">
+          Maximo 30 caracteres
+        </p>
 
         <span>Password</span>
         <input
@@ -48,7 +54,9 @@
         <p class="text-danger" v-if="!$v.password.minLength">
           Minimo 8 caracteres
         </p>
-        <p class="text-danger" v-if="!$v.password.maxLength">Maximo 20 caracteres</p>
+        <p class="text-danger" v-if="!$v.password.maxLength">
+          Maximo 20 caracteres
+        </p>
 
         <span>Repetir Password</span>
         <input
@@ -74,11 +82,18 @@
 </template>
 
 <script>
-import { User } from "../../models/classUser";
-import { required, minLength, email, sameAs, maxLength, alphaNum } from "vuelidate/lib/validators";
+import {
+  required,
+  minLength,
+  email,
+  sameAs,
+  maxLength,
+  alphaNum,
+} from "vuelidate/lib/validators";
+
 export default {
   props: {
-    usersList: Array,
+    usersList: Array
   },
   data() {
     return {
@@ -86,7 +101,41 @@ export default {
       email: "",
       password: "",
       samePassword: "",
+      urlUsers: "https://633435bf90a73d0fede99930.mockapi.io/users",
+      postUsers: async () => {
+        const cursoData = {
+          user: this.$v.user.$model,
+          email: this.$v.email.$model,
+          password: this.$v.password.$model,
+        };
+        let encabezado = {
+          method: "POST",
+          headers: {
+            "Content-type": "application/json",
+            accept: "application/json",
+            "Access-Control-Allow-Origin":
+              "https://633435bf90a73d0fede99930.mockapi.io/users",
+          },
+          body: JSON.stringify(cursoData),
+        };
+        console.log("encabezado.body", encabezado);
+        await fetch(this.urlUsers, encabezado)
+          .then((response) => response.json())
+          .then(() => this.getUsers())
+          .catch((err) => console.error(err))
+      },
+      getUsers: async () => {
+        await fetch(this.urlUsers)
+          .then((response) => response.json())
+          .then((data) => {
+            this.$emit("actualizarLista", data)
+          })
+          .catch((err) => console.error(err));
+      },
     };
+  },
+  mounted() {
+    this.getUsers();
   },
   methods: {
     submit() {
@@ -101,13 +150,7 @@ export default {
         if (found) {
           alert("Usuario o email ya usados");
         } else {
-          this.usersList.push(
-            new User(
-              this.$v.user.$model,
-              this.$v.email.$model,
-              this.$v.password.$model
-            )
-          );
+          this.postUsers(),
           [
             this.$v.user.$model,
             this.$v.email.$model,
@@ -124,17 +167,17 @@ export default {
       required,
       alphaNum,
       minLength: minLength(6),
-      maxLength: maxLength(20)
+      maxLength: maxLength(20),
     },
     email: {
       required,
       email,
-      maxLength: maxLength(30)
+      maxLength: maxLength(30),
     },
     password: {
       required,
       minLength: minLength(8),
-      maxLength: maxLength(20)
+      maxLength: maxLength(20),
     },
     samePassword: {
       required,
@@ -158,7 +201,7 @@ export default {
   font-weight: bold;
 }
 
-.formContainer input{
-    margin-top: 10px !important;
+.formContainer input {
+  margin-top: 10px !important;
 }
 </style>
