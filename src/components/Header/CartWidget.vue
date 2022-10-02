@@ -10,12 +10,9 @@
 
 <script>
 export default {
-  props: {
-    cartList: Array,
-  },
   computed: {
     calculoTotalProductos() {
-      return this.cartList.reduce((suma, product) => {
+      return this.$store.state.storeCarrito.reduce((suma, product) => {
         return suma + product.bought;
       }, 0);
     },

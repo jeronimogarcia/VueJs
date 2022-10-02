@@ -12,7 +12,6 @@
           :meal="meal"
           :index="index"
           :coderMeals="coderMeals"
-          :cartList="cartList"
         />
         <router-link v-bind:to="'/product/' + meal.idt"
           ><b-button class="buttonDetalle btn-info"
@@ -28,9 +27,6 @@
 import Counter from "../components/Counter.vue";
 
 export default {
-  props: {
-    cartList: Array,
-  },
   data() {
     return {
       urlFetch: "https://633435bf90a73d0fede99930.mockapi.io/meals",
@@ -48,7 +44,6 @@ export default {
   mounted() {
     this.getData();
   },
-  methods: {},
   components: { Counter },
 };
 </script>

@@ -4,7 +4,7 @@
       <router-link to="/"><h1>CoderMeals</h1></router-link>
     </div>
     <NavigationBar />
-    <CartWidget :cartList="cartList" />
+    <CartWidget />
   </div>
 </template>
 
@@ -13,7 +13,6 @@ import CartWidget from "./CartWidget.vue";
 import NavigationBar from "./NavigationBar.vue";
 export default {
   props: {
-    cartList: Array,
   },
   components: { CartWidget, NavigationBar },
 };

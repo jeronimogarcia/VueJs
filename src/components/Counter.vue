@@ -3,20 +3,26 @@
       <b-button class="btn-warning"  @click="decrementar()">-</b-button>
       <b-button class="btn-warning" @click="incrementar()">+</b-button>
       <p> {{ meal.counter }} </p>
-      <b-button class="buttonCounter btn-success" @click="add(meal, cartList, meal.counter)">AGREGAR</b-button>
+      <b-button class="buttonCounter btn-success" @click="add(meal, carrito(), meal.counter)">AGREGAR</b-button>
     </div>
   </template>
   
   <script>
   export default {
+    data(){
+      return{
+      }
+    },
     props: {
-      cartList: Array,
       coderMeals: Array,
       meal: Object,
       isLoged: Boolean,
       index: Number,
     },
     methods: {
+      carrito(){
+        return this.$store.state.storeCarrito
+      },
       decrementar() {
         if (this.meal.counter > 1) {
           this.meal.counter--;
@@ -43,13 +49,7 @@
             );
           }
         } else {
-          cartList.push({
-            idt: meal.idt,
-            title: meal.title,
-            price: meal.price,
-            portrait: meal.portrait,
-            bought: meal.counter,
-          });
+          this.$store.dispatch('addMealCarrito', meal)
         }
       },
     }

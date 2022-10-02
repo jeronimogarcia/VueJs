@@ -33,7 +33,7 @@ const router = new VueRouter ({
             name: 'not-found',
             component: () => import('../views/Page404.vue')
           
-          }
+        }
     ]
 })
 

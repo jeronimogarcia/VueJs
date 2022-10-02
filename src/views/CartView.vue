@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="cartList.length != 0">
+    <div v-if="this.$store.state.storeCarrito.length != 0">
       <h1>Lista Carrito</h1>
       <div class="tableContainer">
         <table>
@@ -15,7 +15,7 @@
           </thead>
           <tbody>
             <tr
-              v-for="(producto, index) in cartList"
+              v-for="(producto, index) in this.$store.state.storeCarrito"
               :key="producto.idt"
               :producto="producto"
             >
@@ -58,7 +58,7 @@
         </table>
       </div>
     </div>
-    <div v-if="cartList.length == 0">
+    <div v-if="this.$store.state.storeCarrito.length == 0">
       <h1>No hay Productos en el Carrito</h1>
       <router-link to="/"
         ><b-button class="btn btn-success"
@@ -71,17 +71,14 @@
 
 <script>
 export default {
-  props: {
-    cartList: Array,
-  },
   methods: {
     quitarProductoCarrito(i) {
-      this.cartList.splice(i, 1);
+      this.$store.state.storeCarrito.splice(i, 1);
     },
   },
   computed: {
     calculoTotal() {
-      return this.cartList.reduce((suma, item) => {
+      return this.$store.state.storeCarrito.reduce((suma, item) => {
         return suma + item.bought * item.price;
       }, 0);
     },
