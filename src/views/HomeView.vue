@@ -2,7 +2,7 @@
   <div>
     <div v-if="!$store.state.isLogged">
       <h1>Por favor logearse para acceder a los productos</h1>
-      <b-button class="btn-success"><router-link to="/login">Login/Register</router-link></b-button>
+      <router-link to="/login"><b-button class="btn-success">Login/Register</b-button></router-link>
     </div>
     <div v-else>
       <h1>Lista Productos</h1>
