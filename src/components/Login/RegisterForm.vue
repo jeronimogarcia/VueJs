@@ -107,6 +107,7 @@ export default {
           user: this.$v.user.$model,
           email: this.$v.email.$model,
           password: this.$v.password.$model,
+          isAdmin: false,
         };
         let encabezado = {
           method: "POST",
@@ -155,7 +156,7 @@ export default {
             this.$v.user.$model,
             this.$v.email.$model,
             this.$v.password.$model,
-            this.$v.samePassword.$model,
+            this.$v.samePassword.$model, 
           ] = "";
           this.$v.$reset();
         }

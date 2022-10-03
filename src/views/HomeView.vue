@@ -1,23 +1,29 @@
 <template>
   <div>
-    <h1>Lista Productos</h1>
-    <div class="cardContainer">
-      <div v-for="(meal, index) in coderMeals" :key="meal.name" class="card">
-        <img :src="meal.portrait" :alt="meal.title" />
-        <h3>{{ meal.title }}</h3>
-        <p>
-          $<b> {{ meal.price }} </b>
-        </p>
-        <Counter
-          :meal="meal"
-          :index="index"
-          :coderMeals="coderMeals"
-        />
-        <router-link v-bind:to="'/product/' + meal.idt"
-          ><b-button class="buttonDetalle btn-info"
-            >Ver Detalle</b-button
-          ></router-link
-        >
+    <div v-if="!$store.state.isLogged">
+      <h1>Por favor logearse para acceder a los productos</h1>
+      <b-button class="btn-success"><router-link to="/login">Login/Register</router-link></b-button>
+    </div>
+    <div v-else>
+      <h1>Lista Productos</h1>
+      <div class="cardContainer">
+        <div v-for="(meal, index) in coderMeals" :key="meal.name" class="card">
+          <img :src="meal.portrait" :alt="meal.title" />
+          <h3>{{ meal.title }}</h3>
+          <p>
+            $<b> {{ meal.price }} </b>
+          </p>
+          <Counter
+            :meal="meal"
+            :index="index"
+            :coderMeals="coderMeals"
+          />
+          <router-link v-bind:to="'/product/' + meal.idt"
+            ><b-button class="buttonDetalle btn-info"
+              >Ver Detalle</b-button
+            ></router-link
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -25,7 +31,6 @@
 
 <script>
 import Counter from "../components/Counter.vue";
-
 export default {
   data() {
     return {
@@ -106,5 +111,10 @@ h1 {
 
 .buttonDetalle {
   width: 140px;
+}
+
+a {
+  text-decoration: none;
+  color: white;
 }
 </style>

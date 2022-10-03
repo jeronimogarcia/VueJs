@@ -29,6 +29,12 @@ const router = new VueRouter ({
             component: () => import('../views/ProductDetail.vue'),
         },
         {
+            path:'/addProducts',
+            name: 'addProducts',
+            component: () => import('../views/AddProducts.vue')
+          
+        },
+        {
             path:'/:pathMatch(.*)*',
             name: 'not-found',
             component: () => import('../views/Page404.vue')

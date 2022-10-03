@@ -83,9 +83,16 @@ export default {
             user.password.toLowerCase() == this.$v.password.$model.toLowerCase()
         );
         if (found) {
-          alert("Login satisfactorio");
-          [this.$v.user.$model, this.$v.password.$model] = "";
+          if (found.user == "administrador") {
+            this.$store.dispatch("adminIn");
+            alert("Modo admin");
+          }
+          this.$store.dispatch("logIn");
+          this.$v.user.$model = ""
+          this.$v.password.$model = "";
           this.$v.$reset();
+          console.log("log", this.$store.state.isLogged);
+          console.log("admin", this.$store.state.isAdmin);
         } else {
           alert("Usuario o password incorrecto");
         }

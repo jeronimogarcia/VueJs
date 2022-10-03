@@ -11,8 +11,6 @@ import LoginForm from "@/components/Login/LoginForm.vue";
 import RegisterForm from "@/components/Login/RegisterForm.vue";
 import TableLogin from "@/components/Login/TableLogin.vue";
 export default {
-  props: {
-  },
   data() {
     return {
       usersList: [],

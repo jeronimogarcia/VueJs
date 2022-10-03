@@ -13,8 +13,8 @@
             <td>{{ index }}</td>
             <td>{{ user.user }}</td>
             <td>{{ user.email }}</td>
-            <td>
-              <b-button variant="danger" @click="deleteUsers(user.id)"
+            <td v-if="user.user != 'administrador'">
+              <b-button variant="danger" @click="deleteUsers(user.id)" :disabled="!$store.state.isAdmin"
                 >Eliminar</b-button
               >
             </td>

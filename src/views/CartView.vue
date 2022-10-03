@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-if="this.$store.state.storeCarrito.length != 0">
+    <div v-if="cartLength() != 0">
       <h1>Lista Carrito</h1>
       <div class="tableContainer">
         <table>
@@ -15,7 +15,7 @@
           </thead>
           <tbody>
             <tr
-              v-for="(producto, index) in this.$store.state.storeCarrito"
+              v-for="(producto, index) in cart()"
               :key="producto.idt"
               :producto="producto"
             >
@@ -31,7 +31,7 @@
                 <p class="crossSize">
                   <font-awesome-icon
                     icon="fa-solid fa-square-xmark"
-                    @click="quitarProductoCarrito(index)"
+                    @click="removeCartProduct(index)"
                   />
                 </p>
               </td>
@@ -58,7 +58,7 @@
         </table>
       </div>
     </div>
-    <div v-if="this.$store.state.storeCarrito.length == 0">
+    <div v-if="cartLength() == 0">
       <h1>No hay Productos en el Carrito</h1>
       <router-link to="/"
         ><b-button class="btn btn-success"
@@ -72,13 +72,19 @@
 <script>
 export default {
   methods: {
-    quitarProductoCarrito(i) {
-      this.$store.state.storeCarrito.splice(i, 1);
+    cart() {
+      return this.$store.state.storeCarrito;
+    },
+    cartLength() {
+      return this.cart().length;
+    },
+    removeCartProduct(i) {
+      this.cart().splice(i, 1);
     },
   },
   computed: {
     calculoTotal() {
-      return this.$store.state.storeCarrito.reduce((suma, item) => {
+      return this.cart().reduce((suma, item) => {
         return suma + item.bought * item.price;
       }, 0);
     },
@@ -117,7 +123,7 @@ h1 {
   margin: 5px;
 }
 
-.crossSize:hover{
+.crossSize:hover {
   color: grey;
   cursor: pointer;
 }

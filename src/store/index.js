@@ -6,6 +6,8 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     storeCarrito: [],
+    isLogged: false,
+    isAdmin: false,
   },
   mutations: {
     addCarrito(state, meal) {
@@ -17,6 +19,12 @@ export default new Vuex.Store({
         bought: meal.counter,
       });
     },
+    changeIsLogged(state){
+      state.isLogged = !state.isLogged
+    },
+    changeIsAdmin(state){
+      state.isAdmin = !state.isAdmin
+    }
   },
   getters: {
     getCarrito(state){
@@ -26,7 +34,14 @@ export default new Vuex.Store({
   actions: {
     addMealCarrito({commit}, meal){
       commit('addCarrito', meal)
+    },
+    logIn({commit}){
+      commit('changeIsLogged')
+    },
+    adminIn({commit}){
+      commit('changeIsAdmin')
     }
+
   },
   modules: {},
 });
