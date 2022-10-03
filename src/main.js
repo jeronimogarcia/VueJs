@@ -4,6 +4,8 @@ import router from "./router/router";
 
 import store from "./store/index";
 import Vuelidate from "vuelidate";
+import axios from 'axios'
+import VueAxios from 'vue-axios'
 
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
@@ -17,6 +19,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 library.add(faCartShopping, faSquareXmark, faStar);
 
+Vue.use(VueAxios, axios)
 Vue.use(Vuelidate);
 Vue.use(BootstrapVue);
 Vue.component("font-awesome-icon", FontAwesomeIcon);

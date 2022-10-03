@@ -12,6 +12,7 @@
 export default {
   computed: {
     calculoTotalProductos() {
+      console.log(this.$store.state.storeCarrito)
       return this.$store.state.storeCarrito.reduce((suma, product) => {
         return suma + product.bought;
       }, 0);

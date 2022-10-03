@@ -8,6 +8,8 @@ export default new Vuex.Store({
     storeCarrito: [],
     isLogged: false,
     isAdmin: false,
+    userLoggedId: 0,
+    user:{}
   },
   mutations: {
     addCarrito(state, meal) {
@@ -19,29 +21,46 @@ export default new Vuex.Store({
         bought: meal.counter,
       });
     },
-    changeIsLogged(state){
-      state.isLogged = !state.isLogged
+    modifiedCarrito(state, cart) {
+      state.storeCarrito = cart;
     },
-    changeIsAdmin(state){
-      state.isAdmin = !state.isAdmin
+    changeIsLogged(state) {
+      state.isLogged = !state.isLogged;
+    },
+    changeIsAdmin(state) {
+      state.isAdmin = !state.isAdmin;
+    },
+    userLoggedId(state, id){
+      state.userLoggedId = id
+    },
+    userLogged(state,u){
+      state.user = u
     }
   },
   getters: {
-    getCarrito(state){
-      return state.storeCarrito
-    }
+    getCarrito(state) {
+      return state.storeCarrito;
+    },
   },
   actions: {
-    addMealCarrito({commit}, meal){
-      commit('addCarrito', meal)
+    addMealCarrito({ commit }, meal) {
+      commit("addCarrito", meal);
     },
-    logIn({commit}){
-      commit('changeIsLogged')
+    logIn({ commit }) {
+      commit("changeIsLogged");
     },
-    adminIn({commit}){
-      commit('changeIsAdmin')
+    adminIn({ commit }) {
+      commit("changeIsAdmin");
+    },
+    changeCarrito({ commit }, cart) {
+      commit("modifiedCarrito", cart);
+    },
+    changeUserId({commit}, id) {
+      commit('userLoggedId', id)
+    },
+    changeUser({commit}, u) {
+      commit('userLogged', u)
     }
-
   },
   modules: {},
 });

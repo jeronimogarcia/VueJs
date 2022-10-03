@@ -132,7 +132,7 @@ export default {
       urlUsers: "https://633435bf90a73d0fede99930.mockapi.io/meals",
 
       postProduct: async () => {
-        const cursoData = {
+        const productData = {
           title: this.$v.product.$model,
           price: this.$v.price.$model,
           quantity: this.$v.quantity.$model,
@@ -142,20 +142,9 @@ export default {
           healthy: this.$v.healthy.$model,
           portrait: "https://iili.io/L8anYG.jpg",
           counter: 1,
-        };
-        let encabezado = {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-            accept: "application/json",
-            "Access-Control-Allow-Origin":
-              "https://633435bf90a73d0fede99930.mockapi.io/meals",
-          },
-          body: JSON.stringify(cursoData),
-        };
-        console.log("encabezado.body", encabezado);
-        await fetch(this.urlUsers, encabezado)
-          .then((response) => response.json())
+        }; 
+        await this.axios.post(this.urlUsers, productData)
+          .then((response) => response.data)
           .catch((err) => console.error(err));
       },
     };
@@ -165,13 +154,6 @@ export default {
       this.$v.$touch();
       if (this.$v.$invalid) {
       } else {
-        //   const found = this.usersList.find(
-        //     (user) =>
-        //       user.user.toLowerCase() == this.$v.user.$model.toLowerCase()
-        //   );
-        //   if (found) {
-        //     alert("Producto ya registrado");
-        //   } else {
         this.postProduct(),
           ([
             this.$v.product.$model,
@@ -179,7 +161,6 @@ export default {
             this.$v.quantity.$model,
           ] = "");
         this.$v.$reset();
-        //   }
       }
     },
   },

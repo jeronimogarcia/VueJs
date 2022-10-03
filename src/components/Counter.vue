@@ -1,7 +1,17 @@
 <template>
   <div class="buttonsContainer">
-    <b-button class="btn-warning" @click="decrementar()" :disabled="$store.state.isAdmin">-</b-button>
-    <b-button class="btn-warning" @click="incrementar()" :disabled="$store.state.isAdmin">+</b-button>
+    <b-button
+      class="btn-warning"
+      @click="decrementar()"
+      :disabled="$store.state.isAdmin"
+      >-</b-button
+    >
+    <b-button
+      class="btn-warning"
+      @click="incrementar()"
+      :disabled="$store.state.isAdmin"
+      >+</b-button
+    >
     <p>{{ meal.counter }}</p>
     <b-button
       class="buttonCounter btn-success"
@@ -15,7 +25,24 @@
 <script>
 export default {
   data() {
-    return {};
+    return {
+      putURL:'https://633435bf90a73d0fede99930.mockapi.io/users',
+      usuario: this.$store.state.user,
+      carritoToBD: async () => {
+      const userData = {
+        user: this.usuario.user ,
+        email: this.usuario.email,
+        password: this.usuario.password,
+        id: this.usuario.id,
+        carrito: this.usuario.carrito,
+        isAdmin: this.usuario.isAdmin,
+      };
+      await this.axios
+        .put(this.putURL + "/" + this.$store.state.userLoggedId, userData)
+        .then((response) => response.data)
+        .catch((err) => console.error(err));
+    },
+    };
   },
   props: {
     coderMeals: Array,
@@ -44,6 +71,7 @@ export default {
         if (cartList[findProductIndex].bought + counter <= meal.quantity) {
           cartList[findProductIndex].bought =
             cartList[findProductIndex].bought + counter;
+          this.carritoToBD();
         } else {
           alert(
             `La cantidad que quiere sumar supera a la del stock. Disponemos de ${
@@ -55,6 +83,7 @@ export default {
         }
       } else {
         this.$store.dispatch("addMealCarrito", meal);
+        this.carritoToBD();
       }
     },
   },

@@ -71,6 +71,26 @@
 
 <script>
 export default {
+  data(){
+    return{
+      putURL:'https://633435bf90a73d0fede99930.mockapi.io/users',
+      usuario: this.$store.state.user,
+      carritoToBD: async () => {
+      const userData = {
+        user: this.usuario.user ,
+        email: this.usuario.email,
+        password: this.usuario.password,
+        id: this.usuario.id,
+        carrito: this.usuario.carrito,
+        isAdmin: this.usuario.isAdmin,
+      };
+      await this.axios
+        .put(this.putURL + "/" + this.$store.state.userLoggedId, userData)
+        .then((response) => response.data)
+        .catch((err) => console.error(err));
+    },
+    }
+  },
   methods: {
     cart() {
       return this.$store.state.storeCarrito;
@@ -80,6 +100,7 @@ export default {
     },
     removeCartProduct(i) {
       this.cart().splice(i, 1);
+      this.carritoToBD();
     },
   },
   computed: {

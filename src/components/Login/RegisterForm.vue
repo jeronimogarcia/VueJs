@@ -93,7 +93,7 @@ import {
 
 export default {
   props: {
-    usersList: Array
+    usersList: Array,
   },
   data() {
     return {
@@ -109,27 +109,18 @@ export default {
           password: this.$v.password.$model,
           isAdmin: false,
         };
-        let encabezado = {
-          method: "POST",
-          headers: {
-            "Content-type": "application/json",
-            accept: "application/json",
-            "Access-Control-Allow-Origin":
-              "https://633435bf90a73d0fede99930.mockapi.io/users",
-          },
-          body: JSON.stringify(cursoData),
-        };
-        console.log("encabezado.body", encabezado);
-        await fetch(this.urlUsers, encabezado)
-          .then((response) => response.json())
+        await this.axios
+          .post(this.urlUsers, cursoData)
+          .then((response) => response.data)
           .then(() => this.getUsers())
-          .catch((err) => console.error(err))
+          .catch((err) => console.error(err));
       },
       getUsers: async () => {
-        await fetch(this.urlUsers)
-          .then((response) => response.json())
+        await this.axios
+          .get(this.urlUsers)
+          .then((response) => response.data)
           .then((data) => {
-            this.$emit("actualizarLista", data)
+            this.$emit("actualizarLista", data);
           })
           .catch((err) => console.error(err));
       },
@@ -152,12 +143,12 @@ export default {
           alert("Usuario o email ya usados");
         } else {
           this.postUsers(),
-          [
-            this.$v.user.$model,
-            this.$v.email.$model,
-            this.$v.password.$model,
-            this.$v.samePassword.$model, 
-          ] = "";
+            ([
+              this.$v.user.$model,
+              this.$v.email.$model,
+              this.$v.password.$model,
+              this.$v.samePassword.$model,
+            ] = "");
           this.$v.$reset();
         }
       }

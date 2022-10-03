@@ -31,17 +31,14 @@ export default {
     return {
       urlUsers: "https://633435bf90a73d0fede99930.mockapi.io/users",
       deleteUsers: async (identificador) => {
-        let encabezado = {
-          method: "DELETE",
-        };
-        await fetch(this.urlUsers + "/" + identificador, encabezado)
-          .then((response) => response.json())
+        await this.axios.delete(this.urlUsers + "/" + identificador)
+          .then((response) => response.data)
           .then(()=> this.getUsers())
           .catch((err) => console.error(err));
       },
       getUsers: async () => {
-        await fetch(this.urlUsers)
-          .then((response) => response.json())
+        await this.axios.get(this.urlUsers)
+          .then((response) => response.data)
           .then((data) => {
             this.$emit("actualizarLista", data)
           })

@@ -57,6 +57,18 @@ export default {
     return {
       user: "",
       password: "",
+      urlFetch: "https://633435bf90a73d0fede99930.mockapi.io/users",
+      getCarrito: async (id) => {
+        await this.axios
+          .get(this.urlFetch + "/" + id)
+          .then((response) => response.data)
+          .then((data) => {
+            this.$store.dispatch("changeCarrito", data.carrito);
+            this.$store.dispatch("changeUserId", data.id);
+            this.$store.dispatch("changeUser", data);
+          })
+          .catch((err) => console.error(`${err}`));
+      },
     };
   },
   validations: {
@@ -87,12 +99,11 @@ export default {
             this.$store.dispatch("adminIn");
             alert("Modo admin");
           }
+          this.getCarrito(found.id)
           this.$store.dispatch("logIn");
-          this.$v.user.$model = ""
+          this.$v.user.$model = "";
           this.$v.password.$model = "";
           this.$v.$reset();
-          console.log("log", this.$store.state.isLogged);
-          console.log("admin", this.$store.state.isAdmin);
         } else {
           alert("Usuario o password incorrecto");
         }

@@ -37,8 +37,8 @@ export default {
       urlFetch: "https://633435bf90a73d0fede99930.mockapi.io/meals",
       coderMeals: [],
       getData: async () => {
-        await fetch(this.urlFetch)
-          .then((response) => response.json())
+        await this.axios.get(this.urlFetch)
+          .then((response) => response.data)
           .then((data) => {
             this.coderMeals = data;
           })

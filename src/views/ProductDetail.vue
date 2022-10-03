@@ -53,8 +53,8 @@ export default {
       product: {},
       urlFetch: `https://633435bf90a73d0fede99930.mockapi.io/meals/${this.$route.params.id}`,
       getData: async () => {
-        await fetch(this.urlFetch)
-          .then((response) => response.json())
+        await this.axios.get(this.urlFetch)
+          .then((response) => response.data)
           .then((data) => {
             this.product = data;
           })
