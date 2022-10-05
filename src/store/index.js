@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import axios from "axios";
 
 Vue.use(Vuex);
 
@@ -9,8 +10,11 @@ export default new Vuex.Store({
     isLogged: false,
     isAdmin: false,
     userLoggedId: 0,
-    user:{}
+    user: {},
+    usersList: [],
+    urlUsers: "https://633435bf90a73d0fede99930.mockapi.io/users",
   },
+
   mutations: {
     addCarrito(state, meal) {
       state.storeCarrito.push({
@@ -30,18 +34,29 @@ export default new Vuex.Store({
     changeIsAdmin(state) {
       state.isAdmin = !state.isAdmin;
     },
-    userLoggedId(state, id){
-      state.userLoggedId = id
+    userLoggedId(state, id) {
+      state.userLoggedId = id;
     },
-    userLogged(state,u){
-      state.user = u
-    }
+    userLogged(state, u) {
+      state.user = u;
+    },
+    usersFetch(state) {
+      axios
+        .get(state.urlUsers)
+        .then((response) => response.data)
+        .then((data) => {
+          state.usersList = data;
+        })
+        .catch((err) => console.error(err));
+    },
   },
+
   getters: {
     getCarrito(state) {
       return state.storeCarrito;
     },
   },
+
   actions: {
     addMealCarrito({ commit }, meal) {
       commit("addCarrito", meal);
@@ -55,12 +70,16 @@ export default new Vuex.Store({
     changeCarrito({ commit }, cart) {
       commit("modifiedCarrito", cart);
     },
-    changeUserId({commit}, id) {
-      commit('userLoggedId', id)
+    changeUserId({ commit }, id) {
+      commit("userLoggedId", id);
     },
-    changeUser({commit}, u) {
-      commit('userLogged', u)
-    }
+    changeUser({ commit }, u) {
+      commit("userLogged", u);
+    },
+    getUsers({ commit }) {
+      commit("usersFetch");
+    },
   },
+
   modules: {},
 });

@@ -1,5 +1,5 @@
 <template>
-  <div v-if="usersList.length != 0">
+  <div v-if="this.$store.state.usersList.length != 0">
     <h2>Lista de Usuarios</h2>
     <div class="tableContainer">
       <table>
@@ -9,12 +9,15 @@
           <th>Email</th>
         </thead>
         <tbody>
-          <tr v-for="(user, index) in usersList" :key="user.id" :user="user">
+          <tr v-for="(user, index) in this.$store.state.usersList" :key="user.id" :user="user">
             <td>{{ index }}</td>
             <td>{{ user.user }}</td>
             <td>{{ user.email }}</td>
             <td v-if="user.user != 'administrador'">
-              <b-button variant="danger" @click="deleteUsers(user.id)" :disabled="!$store.state.isAdmin"
+              <b-button
+                variant="danger"
+                @click="deleteUsers(user.id)"
+                :disabled="!$store.state.isAdmin"
                 >Eliminar</b-button
               >
             </td>
@@ -31,23 +34,16 @@ export default {
     return {
       urlUsers: "https://633435bf90a73d0fede99930.mockapi.io/users",
       deleteUsers: async (identificador) => {
-        await this.axios.delete(this.urlUsers + "/" + identificador)
+        await this.axios
+          .delete(this.urlUsers + "/" + identificador)
           .then((response) => response.data)
-          .then(()=> this.getUsers())
-          .catch((err) => console.error(err));
-      },
-      getUsers: async () => {
-        await this.axios.get(this.urlUsers)
-          .then((response) => response.data)
-          .then((data) => {
-            this.$emit("actualizarLista", data)
-          })
+          .then(() => this.$store.dispatch('getUsers'))
           .catch((err) => console.error(err));
       },
     };
   },
-  props: {
-    usersList: Array,
+  mounted() {
+    this.$store.dispatch('getUsers')
   },
 };
 </script>

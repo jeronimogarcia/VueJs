@@ -5,6 +5,7 @@
       <li><router-link to="/login">Login/Register</router-link></li>
       <li><router-link to="/cart">Cart</router-link></li>
       <li v-show="$store.state.isAdmin"><router-link to="/addProducts">AddProducts</router-link></li>
+      <li><router-link to="/users">Users</router-link></li>
     </ul>
   </div>
 </template>
@@ -15,6 +16,7 @@ export default {};
 
 <style scoped>
 .navBarContainer {
+  z-index: 1;
   display: flex;
   align-items: center;
   position: relative;
